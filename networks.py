@@ -3,6 +3,9 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import random
 from tqdm import tqdm
+import pandas as pd
+import logbin230119 as logbin
+
 class network():
     def __init__(self,m):
         """
@@ -62,7 +65,16 @@ class banet(network):
 
 b = banet(5)
 
-for i in tqdm(range(100)):
+for i in tqdm(range(1000000)):
     b.add_node()
-plt.hist(b.attachmentlist)
+
+numbers = []
+for i in b.vertices:
+    numbers.append(np.log(len(b.edges[i])))
+
+x,y =logbin.logbin(numbers,1.1)
+
+plt.loglog(x,y)
+plt.title(i)
 plt.show()
+
