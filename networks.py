@@ -5,6 +5,7 @@ import random
 from tqdm import tqdm
 import pandas as pd
 import logbin230119 as logbin
+import collections
 
 class network():
     def __init__(self,m):
@@ -21,6 +22,27 @@ class network():
                 if i != j:
                     edges_i.append(j)
             self.edges.append(edges_i)
+        self.attachmentlist = []
+        for i in range(len(self.edges)):
+            for j in self.edges[i]:
+                self.attachmentlist.append(i)
+
+    def probabilitydist(self):
+        """
+
+        :return: x,y of distributions
+        """
+
+        numbers = []
+        for i in self.vertices:
+            numbers.append(len(self.edges[i]))
+
+        numbers.sort()
+        prob = collections.Counter(numbers)
+        x, y = zip(*prob.items())
+        y = y / np.linalg.norm(y)
+        return x,y
+
 
     def plot(self):
         """
@@ -40,10 +62,7 @@ class network():
 class banet(network):
     def __init__(self,m):
         network.__init__(self,m)
-        self.attachmentlist = []
-        for i in range(len(self.edges)):
-            for j in self.edges[i]:
-                self.attachmentlist.append(i)
+
 
     def add_node(self):
         self.vertices.append(self.vertices[-1]+1)
@@ -63,18 +82,68 @@ class banet(network):
                 #self.plot()
                 i = i + 1
 
-b = banet(5)
+class ranet(network):
+    def __init__(self,m):
+        network.__init__(self,m)
 
-for i in tqdm(range(1000000)):
-    b.add_node()
 
-numbers = []
-for i in b.vertices:
-    numbers.append(np.log(len(b.edges[i])))
+    def add_node(self):
+        self.vertices.append(self.vertices[-1] + 1)
+        self.edges.append([])
+        connections = [self.vertices[-1]]
+        i = 0
+        while i < self.m:
+            pos = random.choice(self.vertices)
+            if pos in connections:
+                pass
+            else:
+                connections.append(pos)
+                self.edges[pos].append(self.vertices[-1])
+                self.edges[self.vertices[-1]].append(pos)
+                self.attachmentlist.append(pos)
+                self.attachmentlist.append(self.vertices[-1])
+                # self.plot()
+                i = i + 1
+        return
 
-x,y =logbin.logbin(numbers,1.1)
+class minet(network):
+    def __init__(self,m):
+        network.__init__(self,m)
 
+    def add_node(self):
+        i = 0
+        while i < (self.m/2):
+            pos1 = random.choice(self.vertices)
+            pos2 = random.choice(self.vertices)
+            if pos1 == pos2:
+                pass
+            else:
+                self.edges[pos1].append(pos2)
+                self.edges[pos2].append(pos1)
+                i = i + 1
+
+        self.vertices.append(self.vertices[-1]+1)
+        self.edges.append([])
+        connections = [self.vertices[-1]]
+        i = 0
+        while i < (self.m/2):
+            pos = random.choice(self.attachmentlist)
+            if pos in connections:
+                pass
+            else:
+                connections.append(pos)
+                self.edges[pos].append(self.vertices[-1])
+                self.edges[self.vertices[-1]].append(pos)
+                self.attachmentlist.append(pos)
+                self.attachmentlist.append(self.vertices[-1])
+                #self.plot()
+                i = i + 1
+
+
+m = minet(5)
+
+for i in tqdm(range(100000)):
+    m.add_node()
+x,y = m.probabilitydist()
 plt.loglog(x,y)
-plt.title(i)
 plt.show()
-
