@@ -27,7 +27,7 @@ class network():
             for j in self.edges[i]:
                 self.attachmentlist.append(i)
 
-    def probabilitydist(self):
+    def probabilitydist(self, norm = False):
         """
 
         :return: x,y of distributions
@@ -37,11 +37,8 @@ class network():
         for i in self.vertices:
             numbers.append(len(self.edges[i]))
 
-        numbers.sort()
-        prob = collections.Counter(numbers)
-        x, y = zip(*prob.items())
-        y = y / np.linalg.norm(y)
-        return x,y
+
+        return numbers
 
 
     def plot(self):
@@ -140,10 +137,25 @@ class minet(network):
                 i = i + 1
 
 
-m = minet(5)
+b = banet(1)
+numbers = []
 
-for i in tqdm(range(100000)):
-    m.add_node()
-x,y = m.probabilitydist()
+for j in tqdm(range(2000)):
+    for i in range(10000):
+        b.add_node()
+    n = b.probabilitydist()
+    for i in n:
+        numbers.append(i)
+
+
+numbers.sort()
+prob = collections.Counter(numbers)
+x, y = zip(*prob.items())
 plt.loglog(x,y)
 plt.show()
+
+
+
+np.savetxt('2e3_1e4.csv',numbers)
+
+#TODO implement scatter plot instead of plt.plot

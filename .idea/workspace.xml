@@ -12,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Networks$networks.coverage" NAME="networks Coverage Results" MODIFIED="1552831958969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Networks$networks.coverage" NAME="networks Coverage Results" MODIFIED="1552996027291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -33,19 +33,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/networks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="119" column="16" lean-forward="true" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
+            <state relative-caret-position="772">
+              <caret line="151" column="35" lean-forward="true" selection-start-line="151" selection-start-column="35" selection-end-line="151" selection-end-column="35" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#2166#2868#0" />
+                <element signature="e#2896#3916#0" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/logbin230119.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1063" />
           </provider>
         </entry>
       </file>
@@ -178,14 +172,20 @@
       <workItem from="1552747973066" duration="5600000" />
       <workItem from="1552756765783" duration="2174000" />
       <workItem from="1552759195320" duration="35000" />
-      <workItem from="1552823336395" duration="4801000" />
+      <workItem from="1552823336395" duration="5231000" />
+      <workItem from="1552836350709" duration="633000" />
+      <workItem from="1552901990058" duration="756000" />
+      <workItem from="1552918341819" duration="570000" />
+      <workItem from="1552920020464" duration="5000" />
+      <workItem from="1552923929463" duration="1280000" />
+      <workItem from="1552994481825" duration="1678000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16681000" />
+    <option name="totallyTimeSpent" value="22033000" />
   </component>
-  <component name="TodoView" selected-index="1">
+  <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -198,8 +198,8 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="836" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.498998" visible="true" weight="0.14592275" />
-      <window_info id="Structure" order="1" sideWeight="0.501002" side_tool="true" visible="true" weight="0.14592275" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48697394" visible="true" weight="0.15879828" />
+      <window_info id="Structure" order="1" sideWeight="0.51302606" side_tool="true" visible="true" weight="0.15879828" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -217,8 +217,8 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.7134268" visible="true" weight="0.3297568" />
-      <window_info anchor="right" x="0" y="0" width="310" height="642" id="Documentation" order="4" sideWeight="0.28657314" side_tool="true" visible="true" weight="0.3297568" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.5290581" visible="true" weight="0.40271816" />
+      <window_info anchor="right" x="0" y="0" width="310" height="642" id="Documentation" order="4" sideWeight="0.47094187" side_tool="true" visible="true" weight="0.40271816" />
       <window_info anchor="right" id="Database" order="5" sideWeight="0.48096192" weight="0.3297568" />
     </layout>
   </component>
@@ -265,6 +265,17 @@
       </map>
     </option>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/networks.py</url>
+          <line>154</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ersimpledegreedistribution.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -300,10 +311,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/networks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="119" column="16" lean-forward="true" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="16" />
+        <state relative-caret-position="772">
+          <caret line="151" column="35" lean-forward="true" selection-start-line="151" selection-start-column="35" selection-end-line="151" selection-end-column="35" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#2166#2868#0" />
+            <element signature="e#2896#3916#0" />
           </folding>
         </state>
       </provider>
