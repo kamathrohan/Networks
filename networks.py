@@ -6,7 +6,7 @@ from tqdm import tqdm
 import pandas as pd
 import logbin230119 as logbin
 import collections
-
+from decimal import *
 
 class network():
     def __init__(self, m):
@@ -139,9 +139,11 @@ class minet(network):
 def theoranet(data, m):
     pk = []
     for k in data:
-        numer = m ** (k - m)
-        denom = (1 + m) ** (1 + k - m)
-        pki = numer / denom
+        k = np.float64(k)
+        m = np.float64(m)
+        numer = np.float64(m ** (k - m))
+        denom = np.float64((1 + m) ** (1 + k - m))
+        pki = np.float64(numer / denom)
         pk.append(pki)
     return pk
 
@@ -169,13 +171,8 @@ def banetsimulator(m, N, smooth=100):
     numbers.sort()
     prob = collections.Counter(numbers)
     x, y = zip(*prob.items())
-    y = y / np.linalg.norm(y)
-    y = y / 2
-    plt.loglog(x, y)
-    ytheo = theobanet(x, m)
-    plt.loglog(x, ytheo)
-    plt.show()
-    return
+    y = y / np.sum(y)
+    return x, y
 
 
 def ranetsimulator(m, N, smooth=100):
@@ -194,19 +191,37 @@ def ranetsimulator(m, N, smooth=100):
 
     return x, y
 
+def minetsimulator(m, N, smooth=100):
+    b = minet(m)
+    numbers = []
+    for j in tqdm(range(smooth)):
+        for i in range(N):
+            b.add_node()
+        n = b.probabilitydist()
+        for i in n:
+            numbers.append(i)
 
-# x1,y1 =ranetsimulator(3,10000)
-# np.savetxt("ra_3_10000.txt",[x1,y1])
-# x2,y2 =ranetsimulator(1,10000)
+    numbers.sort()
+    prob = collections.Counter(numbers)
+    x, y = zip(*prob.items())
+    y = y / np.sum(y)
+    return x, y
+
+#x2,y2 =ranetsimulator(3,10000)
+#np.savetxt("ra_3_10000.txt",[x2,y2])
+
 """
-plt.loglog(x1,y1)
-ytheo1 = theoranet(x1,3)
-plt.loglog(x1,ytheo1)
-plt.loglog(x2,y2)
-ytheo2 = theoranet(x2,1)
-plt.loglog(x2,ytheo2)
-plt.show()
-#np.savetxt('1_1e2_1e4.csv',numbers)
 
-#TODO implement scatter plot instead of plt.plot
+x2,y2 =ranetsimulator(1,10000)
+np.savetxt("ra_1_10000.txt",[x2,y2])
+
+
+x2,y2 =ranetsimulator(9,10000)
+np.savetxt("ra_9_10000.txt",[x2,y2])
+
+x2,y2 =ranetsimulator(27,10000)
+np.savetxt("ra_27_10000.txt",[x2,y2])
+
+x2,y2 =ranetsimulator(81,10000)
+np.savetxt("ra_81_10000.txt",[x2,y2])
 """
