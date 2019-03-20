@@ -143,7 +143,7 @@ def theoranet(data, m):
         m = np.float64(m)
         numer = np.float64(m ** (k - m))
         denom = np.float64((1 + m) ** (1 + k - m))
-        pki = np.float64(numer / denom)
+        pki = numer / denom
         pk.append(pki)
     return pk
 
@@ -156,6 +156,13 @@ def theobanet(data, m):
         pki = numer / denom
         pk.append(pki)
     return pk
+
+def ranetcutoff(m, N):
+    numer = np.log(N)
+    denom = np.log(m) - np.log(m+1)
+    k1 = m - (numer/denom)
+    return k1
+
 
 
 def banetsimulator(m, N, smooth=100):
@@ -209,19 +216,3 @@ def minetsimulator(m, N, smooth=100):
 
 #x2,y2 =ranetsimulator(3,10000)
 #np.savetxt("ra_3_10000.txt",[x2,y2])
-
-"""
-
-x2,y2 =ranetsimulator(1,10000)
-np.savetxt("ra_1_10000.txt",[x2,y2])
-
-
-x2,y2 =ranetsimulator(9,10000)
-np.savetxt("ra_9_10000.txt",[x2,y2])
-
-x2,y2 =ranetsimulator(27,10000)
-np.savetxt("ra_27_10000.txt",[x2,y2])
-
-x2,y2 =ranetsimulator(81,10000)
-np.savetxt("ra_81_10000.txt",[x2,y2])
-"""
