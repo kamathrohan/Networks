@@ -71,15 +71,16 @@ ax.set_xscale('log')
 
 
 plt.show()
-x = nw.ranetsimulator(3,100,logbin = True)
-np.savetxt("ra_3_100_num.txt",x)
-x = nw.ranetsimulator(3,1000, logbin = True)
-np.savetxt("ra_3_1000_num.txt",x)
-x = nw.ranetsimulator(3,10000, logbin = True)
-np.savetxt("ra_3_10000_num.txt",x)
 """
-x = nw.ranetsimulator(3,100000, logbin = True)
-np.savetxt("ra_3_100000_num.txt",x)
+x = nw.ranetsimulator(3,100,logbinning = True)
+np.savetxt("ra_3_100_logbin.txt",x)
+x = nw.ranetsimulator(3,1000, logbinning = True)
+np.savetxt("ra_3_1000_logbin.txt",x)
+x = nw.ranetsimulator(3,10000, logbinning = True)
+np.savetxt("ra_3_10000_logbin.txt",x)
+
+x = nw.ranetsimulator(3,100000, logbinning = True)
+np.savetxt("ra_3_100000_logbin.txt",x)
 """
 x,y = nw.minetsimulator(3,100)
 np.savetxt("mi_3_100.txt",[x,y])
