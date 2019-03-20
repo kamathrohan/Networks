@@ -182,7 +182,7 @@ def banetsimulator(m, N, smooth=100):
     return x, y
 
 
-def ranetsimulator(m, N, smooth=100):
+def ranetsimulator(m, N, smooth=100, logbin = False):
     b = ranet(m)
     numbers = []
     for j in tqdm(range(smooth)):
@@ -192,11 +192,13 @@ def ranetsimulator(m, N, smooth=100):
         for i in n:
             numbers.append(i)
     numbers.sort()
-    prob = collections.Counter(numbers)
-    x, y = zip(*prob.items())
-    y = y / np.sum(y)
-
-    return x, y
+    if logbin == True:
+        return numbers
+    else:
+        prob = collections.Counter(numbers)
+        x, y = zip(*prob.items())
+        y = y / np.sum(y)
+        return x, y
 
 def minetsimulator(m, N, smooth=100):
     b = minet(m)

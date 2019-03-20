@@ -4,10 +4,10 @@ Created on Wed Mar 20 11:00:48 2019
 
 @author: rkk216
 """
-
 import numpy as np
 import matplotlib.pyplot as plt
 import networks as nw
+"""
 a = np.genfromtxt("ra_3_100.txt")
 x1 = a[0]
 y1 = a[1]
@@ -71,14 +71,23 @@ ax.set_xscale('log')
 
 
 plt.show()
+x = nw.ranetsimulator(3,100,logbin = True)
+np.savetxt("ra_3_100_num.txt",x)
+x = nw.ranetsimulator(3,1000, logbin = True)
+np.savetxt("ra_3_1000_num.txt",x)
+x = nw.ranetsimulator(3,10000, logbin = True)
+np.savetxt("ra_3_10000_num.txt",x)
 """
-x,y = nw.ranetsimulator(3,100)
-np.savetxt("ra_3_100.txt",[x,y])
+x = nw.ranetsimulator(3,100000, logbin = True)
+np.savetxt("ra_3_100000_num.txt",x)
+"""
+x,y = nw.minetsimulator(3,100)
+np.savetxt("mi_3_100.txt",[x,y])
+x,y = nw.minetsimulator(3,1000)
+np.savetxt("mi_3_1000.txt",[x,y])
+x,y = nw.minetsimulator(3,10000)
+np.savetxt("mi_3_10000.txt",[x,y])
+x,y = nw.minetsimulator(3,100000)
+np.savetxt("mi_3_100000.txt",[x,y])
 
-x,y = nw.ranetsimulator(3,1000)
-np.savetxt("ra_3_1000.txt",[x,y])
-x,y = nw.ranetsimulator(3,10000)
-np.savetxt("ra_3_10000.txt",[x,y])
-x,y = nw.ranetsimulator(3,100000)
-np.savetxt("ra_3_100000.txt",[x,y])
 """
