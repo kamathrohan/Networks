@@ -194,7 +194,8 @@ def ranetsimulator(m, N, smooth=100):
 
     return x, y
 
-
+a = [1,2,3,4]
+np.savetxt("test.txt",a)
 # x1,y1 =ranetsimulator(3,10000)
 # np.savetxt("ra_3_10000.txt",[x1,y1])
 # x2,y2 =ranetsimulator(1,10000)
