@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="231aecee-0054-4b3a-b3e2-8f5b27595adc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/networks.py" beforeDir="false" afterPath="$PROJECT_DIR$/networks.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,12 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/networks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="772">
-              <caret line="151" column="35" lean-forward="true" selection-start-line="151" selection-start-column="35" selection-end-line="151" selection-end-column="35" />
-              <folding>
-                <element signature="e#2166#2868#0" />
-                <element signature="e#2896#3916#0" />
-              </folding>
+            <state relative-caret-position="422">
+              <caret line="161" selection-start-line="161" selection-end-line="161" />
             </state>
           </provider>
         </entry>
@@ -178,12 +173,14 @@
       <workItem from="1552918341819" duration="570000" />
       <workItem from="1552920020464" duration="5000" />
       <workItem from="1552923929463" duration="1280000" />
-      <workItem from="1552994481825" duration="1678000" />
+      <workItem from="1552994481825" duration="2648000" />
+      <workItem from="1553073942892" duration="67000" />
+      <workItem from="1553074170256" duration="191000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22033000" />
+    <option name="totallyTimeSpent" value="23261000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -197,13 +194,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="836" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48697394" visible="true" weight="0.15879828" />
-      <window_info id="Structure" order="1" sideWeight="0.51302606" side_tool="true" visible="true" weight="0.15879828" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48296595" visible="true" weight="0.16309012" />
+      <window_info id="Structure" order="1" sideWeight="0.51703405" side_tool="true" visible="true" weight="0.16309012" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3293011" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3293011" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -212,13 +210,13 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293011" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3293011" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3293011" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3293011" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.5290581" visible="true" weight="0.40271816" />
-      <window_info anchor="right" x="0" y="0" width="310" height="642" id="Documentation" order="4" sideWeight="0.47094187" side_tool="true" visible="true" weight="0.40271816" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.5250501" visible="true" weight="0.40271816" />
+      <window_info anchor="right" x="0" y="0" width="310" height="642" id="Documentation" order="4" sideWeight="0.4749499" side_tool="true" visible="true" weight="0.40271816" />
       <window_info anchor="right" id="Database" order="5" sideWeight="0.48096192" weight="0.3297568" />
     </layout>
   </component>
@@ -265,17 +263,6 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/networks.py</url>
-          <line>154</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ersimpledegreedistribution.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -311,12 +298,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/networks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="151" column="35" lean-forward="true" selection-start-line="151" selection-start-column="35" selection-end-line="151" selection-end-column="35" />
-          <folding>
-            <element signature="e#2166#2868#0" />
-            <element signature="e#2896#3916#0" />
-          </folding>
+        <state relative-caret-position="422">
+          <caret line="161" selection-start-line="161" selection-end-line="161" />
         </state>
       </provider>
     </entry>

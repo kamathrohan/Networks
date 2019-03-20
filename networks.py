@@ -7,14 +7,15 @@ import pandas as pd
 import logbin230119 as logbin
 import collections
 
+
 class network():
-    def __init__(self,m):
+    def __init__(self, m):
         """
 
         :param m: number of edges added for every node
         """
         self.m = m
-        self.vertices = list(range(m+1))
+        self.vertices = list(range(m + 1))
         self.edges = []
         for i in self.vertices:
             edges_i = []
@@ -27,7 +28,7 @@ class network():
             for j in self.edges[i]:
                 self.attachmentlist.append(i)
 
-    def probabilitydist(self, norm = False):
+    def probabilitydist(self, norm=False):
         """
 
         :return: x,y of distributions
@@ -36,10 +37,7 @@ class network():
         numbers = []
         for i in self.vertices:
             numbers.append(len(self.edges[i]))
-
-
         return numbers
-
 
     def plot(self):
         """
@@ -50,19 +48,19 @@ class network():
         graph.add_nodes_from(self.vertices)
         for i in range(len(self.edges)):
             for j in self.edges[i]:
-                graph.add_edge(i,j)
+                graph.add_edge(i, j)
         plt.plot()
         nx.draw(graph)
         plt.show()
         return
 
-class banet(network):
-    def __init__(self,m):
-        network.__init__(self,m)
 
+class banet(network):
+    def __init__(self, m):
+        network.__init__(self, m)
 
     def add_node(self):
-        self.vertices.append(self.vertices[-1]+1)
+        self.vertices.append(self.vertices[-1] + 1)
         self.edges.append([])
         connections = [self.vertices[-1]]
         i = 0
@@ -76,13 +74,13 @@ class banet(network):
                 self.edges[self.vertices[-1]].append(pos)
                 self.attachmentlist.append(pos)
                 self.attachmentlist.append(self.vertices[-1])
-                #self.plot()
+                # self.plot()
                 i = i + 1
 
-class ranet(network):
-    def __init__(self,m):
-        network.__init__(self,m)
 
+class ranet(network):
+    def __init__(self, m):
+        network.__init__(self, m)
 
     def add_node(self):
         self.vertices.append(self.vertices[-1] + 1)
@@ -94,7 +92,7 @@ class ranet(network):
             if pos in connections:
                 pass
             else:
-                connections.append(pos)
+                # connections.append(pos)
                 self.edges[pos].append(self.vertices[-1])
                 self.edges[self.vertices[-1]].append(pos)
                 self.attachmentlist.append(pos)
@@ -103,13 +101,14 @@ class ranet(network):
                 i = i + 1
         return
 
+
 class minet(network):
-    def __init__(self,m):
-        network.__init__(self,m)
+    def __init__(self, m):
+        network.__init__(self, m)
 
     def add_node(self):
         i = 0
-        while i < (self.m/2):
+        while i < (self.m / 2):
             pos1 = random.choice(self.vertices)
             pos2 = random.choice(self.vertices)
             if pos1 == pos2:
@@ -119,11 +118,11 @@ class minet(network):
                 self.edges[pos2].append(pos1)
                 i = i + 1
 
-        self.vertices.append(self.vertices[-1]+1)
+        self.vertices.append(self.vertices[-1] + 1)
         self.edges.append([])
         connections = [self.vertices[-1]]
         i = 0
-        while i < (self.m/2):
+        while i < (self.m / 2):
             pos = random.choice(self.attachmentlist)
             if pos in connections:
                 pass
@@ -133,29 +132,81 @@ class minet(network):
                 self.edges[self.vertices[-1]].append(pos)
                 self.attachmentlist.append(pos)
                 self.attachmentlist.append(self.vertices[-1])
-                #self.plot()
+                # self.plot()
                 i = i + 1
 
 
-b = banet(1)
-numbers = []
+def theoranet(data, m):
+    pk = []
+    for k in data:
+        numer = m ** (k - m)
+        denom = (1 + m) ** (1 + k - m)
+        pki = numer / denom
+        pk.append(pki)
+    return pk
 
-for j in tqdm(range(2000)):
-    for i in range(10000):
-        b.add_node()
-    n = b.probabilitydist()
-    for i in n:
-        numbers.append(i)
+
+def theobanet(data, m):
+    pk = []
+    for k in data:
+        numer = 2 * m * (m + 1)
+        denom = (k + 2) * (k + 1) * k
+        pki = numer / denom
+        pk.append(pki)
+    return pk
 
 
-numbers.sort()
-prob = collections.Counter(numbers)
-x, y = zip(*prob.items())
-plt.loglog(x,y)
+def banetsimulator(m, N, smooth=100):
+    b = banet(m)
+    numbers = []
+    for j in tqdm(range(smooth)):
+        for i in range(N):
+            b.add_node()
+        n = b.probabilitydist()
+        for i in n:
+            numbers.append(i)
+
+    numbers.sort()
+    prob = collections.Counter(numbers)
+    x, y = zip(*prob.items())
+    y = y / np.linalg.norm(y)
+    y = y / 2
+    plt.loglog(x, y)
+    ytheo = theobanet(x, m)
+    plt.loglog(x, ytheo)
+    plt.show()
+    return
+
+
+def ranetsimulator(m, N, smooth=100):
+    b = ranet(m)
+    numbers = []
+    for j in tqdm(range(smooth)):
+        for i in range(N):
+            b.add_node()
+        n = b.probabilitydist()
+        for i in n:
+            numbers.append(i)
+    numbers.sort()
+    prob = collections.Counter(numbers)
+    x, y = zip(*prob.items())
+    y = y / np.sum(y)
+
+    return x, y
+
+
+# x1,y1 =ranetsimulator(3,10000)
+# np.savetxt("ra_3_10000.txt",[x1,y1])
+# x2,y2 =ranetsimulator(1,10000)
+"""
+plt.loglog(x1,y1)
+ytheo1 = theoranet(x1,3)
+plt.loglog(x1,ytheo1)
+plt.loglog(x2,y2)
+ytheo2 = theoranet(x2,1)
+plt.loglog(x2,ytheo2)
 plt.show()
-
-
-
-np.savetxt('2e3_1e4.csv',numbers)
+#np.savetxt('1_1e2_1e4.csv',numbers)
 
 #TODO implement scatter plot instead of plt.plot
+"""
