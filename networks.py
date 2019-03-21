@@ -139,21 +139,22 @@ class minet(network):
 def theoranet(data, m):
     pk = []
     for k in data:
-        k = np.float64(k)
-        m = np.float64(m)
-        numer = np.float64(m ** (k - m))
-        denom = np.float64((1 + m) ** (1 + k - m))
-        pki = numer / denom
+        k = k
+        m = m
+        numer = (k - m)*np.log(m)
+        denom =  (1 + k - m)*np.log((1 + m))
+        pki = numer - denom
         pk.append(pki)
+        #print(type(pki))
     return pk
 
 
 def theobanet(data, m):
     pk = []
     for k in data:
-        numer = 2 * m * (m + 1)
-        denom = (k + 2) * (k + 1) * k
-        pki = numer / denom
+        numer = np.log(2 * m * (m + 1))
+        denom = np.log((k + 2) * (k + 1) * k)
+        pki = numer - denom
         pk.append(pki)
     return pk
 
@@ -216,5 +217,4 @@ def minetsimulator(m, N, smooth=100):
     y = y / np.sum(y)
     return x, y
 
-#x2,y2 =ranetsimulator(3,10000)
-#np.savetxt("ra_3_10000.txt",[x2,y2])
+
