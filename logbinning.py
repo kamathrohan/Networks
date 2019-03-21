@@ -9,24 +9,24 @@ import matplotlib.pyplot as plt
 import networks as nw
 import logbin230119 as logbin
 
-a = np.genfromtxt("ra_3_100_logbin.txt")
+a = np.genfromtxt("ra_3_100_logbin_1.2.txt")
 
 x100 = a[0]
 y100 = a[1]
 xcut100 = nw.ranetcutoff(3,100)
 
 
-a = np.genfromtxt("ra_3_1000_logbin.txt")
+a = np.genfromtxt("ra_3_1000_logbin_1.2.txt")
 x1000 = a[0]
 y1000 = a[1]
 xcut1000 = nw.ranetcutoff(3,1000)
 
-a = np.genfromtxt("ra_3_10000_logbin.txt")
+a = np.genfromtxt("ra_3_10000_logbin_1.2.txt")
 x10000 = a[0]
 y10000 = a[1]
 xcut10000 = nw.ranetcutoff(3,10000)
 
-a = np.genfromtxt("ra_3_100000_logbin.txt")
+a = np.genfromtxt("ra_3_100000_logbin_1.2.txt")
 x100000 = a[0]
 x100000 = a[1]
 xcut100000 = nw.ranetcutoff(3,100000)
