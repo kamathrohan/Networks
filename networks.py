@@ -157,6 +157,16 @@ def theobanet(data, m):
         pk.append(pki)
     return pk
 
+def theominet(data,m):
+    pk = []
+    for k in data:
+        numer = np.log(12*m) + np.log(3*m+1) + np.log(3*m+2) + np.log(3*m +3)
+        denom = np.log(k + 2*m +4) + np.log(k + 2*m +3 )+ np.log(k+2*m+2) + np.log(k +2*m +1)+np.log(k+2*m)
+        pki = numer - denom
+        pk.append(pki)
+    return pk
+
+
 def ranetcutoff(m, N):
     numer = np.log(N)
     denom = np.log(m) - np.log(m+1)
