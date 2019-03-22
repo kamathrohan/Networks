@@ -122,7 +122,7 @@ class minet(network):
         self.edges.append([])
         connections = [self.vertices[-1]]
         i = 0
-        while i < (self.m / 2)+1:
+        while i < ((self.m / 2)+1):
             pos = random.choice(self.attachmentlist)
             if pos in connections:
                 pass
