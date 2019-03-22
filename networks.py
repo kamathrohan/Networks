@@ -139,8 +139,6 @@ class minet(network):
 def theoranet(data, m):
     pk = []
     for k in data:
-        k = k
-        m = m
         numer = (k - m)*np.log(m)
         denom =  (1 + k - m)*np.log((1 + m))
         pki = numer - denom
@@ -172,10 +170,19 @@ def ranetcutoff(m, N):
     numer = np.log(N)
     denom = np.log(m) - np.log(m+1)
     k1 = m - (numer/denom)
-    return k1
+    return np.log(k1)
 
 
-
+def banetcutoff(m, N):
+    a = 1 + (4*N*m*(m+1))
+    numer = np.sqrt(a)- 1
+    return np.log(numer/2)
+    
+    
+    
+    
+    
+    
 def banetsimulator(m, N, smooth=100,logbinning = False, scale = 1.3):
     b = banet(m)
     numbers = []
