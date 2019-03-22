@@ -122,7 +122,7 @@ class minet(network):
         self.edges.append([])
         connections = [self.vertices[-1]]
         i = 0
-        while i < (self.m / 2)+1:
+        while i < (self.m / 2):
             pos = random.choice(self.attachmentlist)
             if pos in connections:
                 pass
@@ -221,7 +221,7 @@ def ranetsimulator(m, N, smooth=100, logbinning = False, scale = 1.3):
         y = y / np.sum(y)
     return x, y
 
-def minetsimulator(m, N, smooth=100):
+def minetsimulator(m, N, smooth=100, logbinning = False, scale = 1.3):
     b = minet(m)
     numbers = []
     for j in tqdm(range(smooth)):
@@ -232,9 +232,12 @@ def minetsimulator(m, N, smooth=100):
             numbers.append(i)
 
     numbers.sort()
-    prob = collections.Counter(numbers)
-    x, y = zip(*prob.items())
-    y = y / np.sum(y)
+    if logbinning == True:
+        x,y = logbin.logbin(numbers, scale = scale)
+    else:
+        prob = collections.Counter(numbers)
+        x, y = zip(*prob.items())
+        y = y / np.sum(y)
     return x, y
 
 
