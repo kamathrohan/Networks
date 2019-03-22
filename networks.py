@@ -122,7 +122,7 @@ class minet(network):
         self.edges.append([])
         connections = [self.vertices[-1]]
         i = 0
-        while i < (self.m / 2):
+        while i < (self.m / 2)+1:
             pos = random.choice(self.attachmentlist)
             if pos in connections:
                 pass
@@ -201,7 +201,6 @@ def banetsimulator(m, N, smooth=100,logbinning = False, scale = 1.3):
         x, y = zip(*prob.items())
         y = y / np.sum(y)
     return x, y
-    return x, y
 
 
 def ranetsimulator(m, N, smooth=100, logbinning = False, scale = 1.3):
@@ -239,3 +238,23 @@ def minetsimulator(m, N, smooth=100):
     return x, y
 
 
+def baplotter(data,m):
+    a = np.genfromtxt(data)
+    x = a[0]
+    y = a[1]
+    ytho = theobanet(x,m)
+    return np.log(x),np.log(y),ytho
+
+def raplotter(data,m):
+    a = np.genfromtxt(data)
+    x = a[0]
+    y = a[1]
+    ytho = theoranet(x,m)
+    return np.log(x),np.log(y),ytho
+
+def miplotter(data,m):
+    a = np.genfromtxt(data)
+    x = a[0]
+    y = a[1]
+    ytho = theoranet(x,m)
+    return np.log(x),np.log(y),ytho
