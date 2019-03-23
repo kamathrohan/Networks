@@ -54,7 +54,6 @@ class network():
         plt.show()
         return
 
-
 class banet(network):
     def __init__(self, m):
         network.__init__(self, m)
@@ -76,7 +75,6 @@ class banet(network):
                 self.attachmentlist.append(self.vertices[-1])
                 # self.plot()
                 i = i + 1
-
 
 class ranet(network):
     def __init__(self, m):
@@ -101,14 +99,29 @@ class ranet(network):
                 i = i + 1
         return
 
-
 class minet(network):
     def __init__(self, m):
         network.__init__(self, m)
 
     def add_node(self):
+        self.vertices.append(self.vertices[-1] + 1)
+        self.edges.append([])
+        connections = [self.vertices[-1]]
         i = 0
-        while i < (self.m / 2):
+        r = np.int(self.m/2)
+        while i < (self.m-r):
+            pos = random.choice(self.attachmentlist)
+            if pos in connections:
+                pass
+            else:
+                self.edges[pos].append(self.vertices[-1])
+                self.edges[self.vertices[-1]].append(pos)
+                self.attachmentlist.append(pos)
+                self.attachmentlist.append(self.vertices[-1])
+                i = i + 1
+        i = 0
+
+        while i < r:
             pos1 = random.choice(self.vertices)
             pos2 = random.choice(self.vertices)
             if pos1 == pos2:
@@ -116,23 +129,8 @@ class minet(network):
             else:
                 self.edges[pos1].append(pos2)
                 self.edges[pos2].append(pos1)
-                i = i + 1
-
-        self.vertices.append(self.vertices[-1] + 1)
-        self.edges.append([])
-        connections = [self.vertices[-1]]
-        i = 0
-        while i < (self.m / 2):
-            pos = random.choice(self.attachmentlist)
-            if pos in connections:
-                pass
-            else:
-                connections.append(pos)
-                self.edges[pos].append(self.vertices[-1])
-                self.edges[self.vertices[-1]].append(pos)
-                self.attachmentlist.append(pos)
-                self.attachmentlist.append(self.vertices[-1])
-                # self.plot()
+                self.attachmentlist.append(pos1)
+                self.attachmentlist.append(pos2)
                 i = i + 1
 
 
@@ -146,7 +144,6 @@ def theoranet(data, m):
         #print(type(pki))
     return pk
 
-
 def theobanet(data, m):
     pk = []
     for k in data:
@@ -159,11 +156,21 @@ def theobanet(data, m):
 def theominet(data,m):
     pk = []
     for k in data:
-        numer = np.log(12*m) + np.log(3*m+1) + np.log(3*m+2) + np.log(3*m +3)
-        denom = np.log(k + 2*m +4) + np.log(k + 2*m +3 )+ np.log(k+2*m+2) + np.log(k +2*m +1)+np.log(k+2*m)
+        numer = np.log((12*m)*((3*m)+1)*((3*m)+2)*((3*m) +3))
+        denom = np.log((k + (2*m) +4)*(k + (2*m) +3)*(k+(2*m)+2)*(k +(2*m) +1)*(k+2*m))
         pki = numer - denom
         pk.append(pki)
     return pk
+
+def theominet2(data,m):
+    pk = []
+    for k in data:
+        numer = np.log(12*m*(3*m+1)*((3*m)+2)*((3*m) +3))
+        denom = np.log((k + (2*m) +4)*(k + (2*m) +3)*(k+(2*m)+2)*(k +(2*m) +1)*(k+2*m))
+        pki = numer - denom
+        pk.append(pki)
+    return pk
+
 
 
 def ranetcutoff(m, N):
@@ -172,17 +179,11 @@ def ranetcutoff(m, N):
     k1 = m - (numer/denom)
     return np.log(k1)
 
-
 def banetcutoff(m, N):
     a = 1 + (4*N*m*(m+1))
     numer = np.sqrt(a)- 1
     return np.log(numer/2)
-    
-    
-    
-    
-    
-    
+
 def banetsimulator(m, N, smooth=100,logbinning = False, scale = 1.3):
     b = banet(m)
     numbers = []
@@ -195,13 +196,13 @@ def banetsimulator(m, N, smooth=100,logbinning = False, scale = 1.3):
 
     numbers.sort()
     if logbinning == True:
-        x,y = logbin.logbin(numbers, scale = scale)
+        x,y, ystddv = logbin.logbin2(numbers, scale = scale)
+        return x ,y , ystddv
     else:
         prob = collections.Counter(numbers)
         x, y = zip(*prob.items())
         y = y / np.sum(y)
-    return x, y
-
+        return x, y
 
 def ranetsimulator(m, N, smooth=100, logbinning = False, scale = 1.3):
     b = ranet(m)
@@ -233,13 +234,13 @@ def minetsimulator(m, N, smooth=100, logbinning = False, scale = 1.3):
 
     numbers.sort()
     if logbinning == True:
-        x,y = logbin.logbin(numbers, scale = scale)
+        x,y, ystddv = logbin.logbin2(numbers, scale = scale)
+        return x, y, ystddv
     else:
         prob = collections.Counter(numbers)
         x, y = zip(*prob.items())
-        y = y / np.sum(y)
-    return x, y
-
+        y = y/ (np.sum(y))
+        return x, y
 
 def baplotter(data,m):
     a = np.genfromtxt(data)
@@ -261,3 +262,28 @@ def miplotter(data,m):
     y = a[1]
     ytho = theoranet(x,m)
     return np.log(x),np.log(y),ytho
+
+def racutoffsimulator(m, N, smooth=100):
+    b = ranet(m)
+    maximum = []
+    for j in tqdm(range(smooth)):
+        for i in range(N):
+            b.add_node()
+        n = b.probabilitydist()
+        prob = collections.Counter(n)
+        x, y = zip(*prob.items())
+        maximum.append(max(x))
+    return maximum
+
+def bacutoffsimulator(m, N, smooth=100):
+    b = banet(m)
+    maximum = []
+    for j in tqdm(range(smooth)):
+        for i in range(N):
+            b.add_node()
+        n = b.probabilitydist()
+        prob = collections.Counter(n)
+        x, y = zip(*prob.items())
+        maximum.append(max(x))
+    return maximum
+
