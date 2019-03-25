@@ -133,7 +133,6 @@ class minet(network):
                 self.attachmentlist.append(pos2)
                 i = i + 1
 
-
 def theoranet(data, m):
     pk = []
     for k in data:
@@ -156,8 +155,8 @@ def theobanet(data, m):
 def theominet(data,m):
     pk = []
     for k in data:
-        numer = np.log((12*m)*((3*m)+1)*((3*m)+2)*((3*m) +3))
-        denom = np.log((k + (2*m) +4)*(k + (2*m) +3)*(k+(2*m)+2)*(k +(2*m) +1)*(k+2*m))
+        numer = np.log((9/4)*m*((9*m)+2)*((9*m)+4)*((9*m) +6))
+        denom = np.log((k + (4*m) +4)*(k + (4*m) +3)*(k+(4*m)+2)*(k +(4*m) +1)*(k+4*m))
         pki = numer - denom
         pk.append(pki)
     return pk
@@ -170,8 +169,6 @@ def theominet2(data,m):
         pki = numer - denom
         pk.append(pki)
     return pk
-
-
 
 def ranetcutoff(m, N):
     numer = np.log(N)
@@ -187,7 +184,7 @@ def banetcutoff(m, N):
 def banetsimulator(m, N, smooth=100,logbinning = False, scale = 1.3):
     b = banet(m)
     numbers = []
-    for j in tqdm(range(smooth)):
+    for j in range(smooth):
         for i in range(N):
             b.add_node()
         n = b.probabilitydist()
@@ -196,8 +193,8 @@ def banetsimulator(m, N, smooth=100,logbinning = False, scale = 1.3):
 
     numbers.sort()
     if logbinning == True:
-        x,y, ystddv = logbin.logbin2(numbers, scale = scale)
-        return x ,y , ystddv
+        x,y = logbin.logbin(numbers, scale = scale)
+        return x ,y
     else:
         prob = collections.Counter(numbers)
         x, y = zip(*prob.items())
@@ -287,3 +284,49 @@ def bacutoffsimulator(m, N, smooth=100):
         maximum.append(max(x))
     return maximum
 
+def baerrors(m,N,smooth):
+    ymas = []
+    xmas = []
+    for i in tqdm(range(smooth)):
+        x, y = banetsimulator(m, N, smooth=1, logbinning=True, scale=1.2)
+        ymas.append(y)
+        xmas.append(x)
+    lengths = [len(i) for i in ymas]
+    l = max(lengths)
+    argmax = np.argmax(lengths)
+    xnew = xmas[argmax]
+    b = len(ymas)
+
+    ymasnew = np.zeros((b, l))
+    for i in range(len(ymas)):
+        for j in range(len(ymas[i])):
+            ymasnew[i][j] = ymas[i][j]
+    ymean = np.mean(ymasnew, axis=0)
+    ystddv = np.std(ymasnew, axis=0)
+    ytheo = theobanet(xnew,m)
+    yerr = [(ystddv[i] / ymean[i]) for i in range(len(xnew))]
+    return [xnew,ymean,yerr,ytheo]
+
+def leastsq(data, theory):
+    residue = 0
+    totalsumsq = 0
+    mean = np.average(data)
+    for i in range(len(data)):
+        rs = (data[i] - theory[i])**2
+        sumsq = (data[i] - mean)**2
+        residue = residue + rs
+        totalsumsq = totalsumsq + sumsq
+    rsq = 1 - (residue/totalsumsq)
+    return rsq
+
+def weightedlqs(data, theory, error):
+    residue = 0
+    totalsumsq = 0
+    mean = np.average(data)
+    for i in range(len(data)):
+        rs = (data[i] - theory[i])**2
+        sumsq = ((data[i] - mean)/error[i])**2
+        residue = residue + rs
+        totalsumsq = totalsumsq + sumsq
+    rsq = 1 - (residue/totalsumsq)
+    return rsq
