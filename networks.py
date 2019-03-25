@@ -232,7 +232,7 @@ def minetsimulator(m, N, smooth=100, logbinning = False, scale = 1.3):
     numbers.sort()
     if logbinning == True:
         x,y, ystddv = logbin.logbin2(numbers, scale = scale)
-        return x, y, ystddv
+        return x, y
     else:
         prob = collections.Counter(numbers)
         x, y = zip(*prob.items())

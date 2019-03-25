@@ -34,7 +34,11 @@ xcut10000 = nw.ranetcutoff(3,10000)
 a = np.genfromtxt("ra_3_100000.txt")
 x100000 = np.log(a[0])
 xcut100000 = nw.ranetcutoff(3,100000)
+
+"""
 y = [max(x100),max(x1000),max(x10000),max(x100000)]
 x = [xcut100,xcut1000,xcut1000,xcut100000]
 print(x)
 print(y)
+
+"""
